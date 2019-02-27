@@ -577,6 +577,22 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	}
 
 	/**
+	 * Create or update a record matching the attributes, and fill it with values without saving it.
+	 *
+	 * @param  array  $attributes
+	 * @param  array  $values
+	 * @return static
+	 */
+	public static function updateOrNew(array $attributes, array $values = array())
+	{
+		$instance = static::firstOrNew($attributes);
+
+		$instance->fill($values);
+
+		return $instance;
+	}
+
+	/**
 	 * Get the first model for the given attributes.
 	 *
 	 * @param  array  $attributes
